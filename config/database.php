@@ -1,5 +1,5 @@
 <?php
-    class Databse{
+    class Database{
         private $conn;
         private $host;
         private $port;
@@ -19,7 +19,7 @@
             if($this->conn){
                 return $this->conn;
             } else {
-                $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->name}";
+                $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};";
 
                 try{
                     $this->conn = new PDO($dsn, $this->username, $this->password);
@@ -27,7 +27,7 @@
                     return $this->conn;
                 } catch (PDOException $e){
                     // echo for tutorial, but log the error for production
-                    echo 'Connection Error: ' . $$e.getMessage();
+                    echo 'Connection Error: ' . $e->getMessage();
                 }
             }
         }
