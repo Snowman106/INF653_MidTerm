@@ -1,20 +1,6 @@
 <?php
 
-    // Headers
-    header('Access-Control-Allow-Origin: *');
-    header('Content-Type: applications/json');
-
-    include_once '../../config/Database.php';
-    include_once '../../models/Author.php';
-
-    // Instantiate DB and Connect
-    $database = new Database();
-    $db = $database->connect();
-
-    // Instantiate blog author Object
-    $author = new Author($db);
-
-    // Blog author query
+    // Post author query
     $result = $author->read();
 
     // Get row count
