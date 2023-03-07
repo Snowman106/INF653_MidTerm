@@ -7,7 +7,7 @@
         private $username;
         private $password;
 
-        public function __constructor(){
+        public function __construct(){
             $this->username = getenv('USERNAME');
             $this->password = getenv('PASSWORD');
             $this->dbname = getenv('DBNAME');
