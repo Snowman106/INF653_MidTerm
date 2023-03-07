@@ -16,9 +16,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Midterm Example</title>
+        <title>Justin Snowden</title>
     </head>
     <body>
-        <h1>Midterm Example REST API</h1>
+        <h1>Justin Snowden INF 653 Midterm</h1>
     </body>
     </html>
