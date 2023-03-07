@@ -9,17 +9,16 @@
         exit();
     }
     ?>
-    <!DOCTYPE html>
+   
+   <!DOCTYPE html>
     <html lang="en">
-    <Head>
+    <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IEedge">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Justin Snowden INF 651 Midterm</title>
+        <title>Midterm Example</title>
     </head>
     <body>
-        <h1>
-            <P>Justin Snowden INF 651 Midterm</p>
-        </h1>  
+        <h1>Midterm Example REST API</h1>
     </body>
     </html>
