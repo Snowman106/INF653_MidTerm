@@ -37,14 +37,31 @@
 
 switch($method) {
     case "GET":
-        if(isset(4id)) {
+        if(isset($id)) {
             if(!$authorsExists){
-                echo json_encode(array('message' => 'authorID NOT found'));
+                echo json_encode(array('message' => 'authorID NOT Found'));
             } else {
                 include_once 'read.single.php';
             }
         } else {
-            include_once 'read.php';
+            require 'read.php';
+        }
+        break;
+    case "POST":
+        require 'create.php';
+        break;
+    case "PUT":
+        if(!$authorsExists) {
+            echo json_encode(array('message' => 'authorID NOT Found'));
+        } else {
+            require 'update.php';
+        }
+        break;
+    case "DELETE":
+        IF(!$authorsExists){
+            echo json_encode(array('message' => 'authorID NOT Found'));
+        } else {
+            require 'delete.php';
         }
         break;
 }
