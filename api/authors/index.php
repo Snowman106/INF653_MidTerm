@@ -35,4 +35,16 @@
         $authorsExists = isValid($id, $author);
     }
 
-    
+switch($method) {
+    case "GET":
+        if(isset(4id)) {
+            if(!$authorsExists){
+                echo json_encode(array('message' => 'authorID NOT found'));
+            } else {
+                include_once 'read.single.php';
+            }
+        } else {
+            include_once 'read.php';
+        }
+        break;
+}
