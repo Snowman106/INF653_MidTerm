@@ -8,6 +8,7 @@
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
     }
+    
     ?>
    
    <!DOCTYPE html>
