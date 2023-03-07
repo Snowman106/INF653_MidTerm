@@ -1,4 +1,5 @@
 <?php
+
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: applications/json');
     $method = $_SERVER['REQUEST_METHOD'];
@@ -10,8 +11,10 @@
     }
     
     // Include Files
-    include_once '../../config/Database.php';
-    include_once '../../models/Author.php';
+    
+    require '../../functions/isValid.php';
+    require '../../config/Database.php';
+    require '../../models/Author.php';
 
     // Instantiate DB and Connect
     $database = new Database();
@@ -24,3 +27,10 @@
     $data = json_decode(file_get_contents("php://input"));
 
     // Declare Variable for Isset
+    if(isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $authorsExists = isValid($id, $author);
+    } elseif (isset($data->id)) {
+        $id = $data->id;
+        $authorsExists = isValid($id, $author);
+    }
