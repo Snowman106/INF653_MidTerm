@@ -1,180 +1,157 @@
 <?php 
     class Author {
+
         // DB stuff
         private $conn;
-        private $table = 'author';
+        private $table = 'authors';
 
         // Author Properties
         public $id;
         public $author;
 
-        // Constructor with DB
+        // Construct with DB
         public function __construct($db) {
         $this->conn = $db;
         }
 
+        // Get authors
+        public function read(){
+            // Create Query
+            $query = 'SELECT 
+                id, 
+                author
+            FROM 
+                ' . $this->table;
 
-            // Get authors
-            public function read(){
-                // Create Query
-                $query = 'SELECT 
-                    id, 
-                    author,
-                FROM 
-                    ' . $this->table;
+            // Prepared Statements
+            $stmt = $this->conn->prepare($query);
 
-                // Prepared Statements
-                $stmt = $this->conn->prepare($query);
+            // Execute query
+            try{
+                $stmt->execute();
+                return $stmt;
+            } catch(PDOException $e) {
+                echo json_encode(
+                    array('message' => $e->getmessage()));                    
+            }           
+        }
 
+        // Get Single authors
+        public function read_single(){
+            // Create Query
+            $query = 'SELECT 
+                id,
+                author
+            FROM '
+                . $this->table . 
+            ' WHERE 
+                id = ? LIMIT 0,1';
+
+            // Prepare Statement
+            $stmt = $this->conn->prepare($query);
+
+            // Bind ID
+            $stmt->bindParam(1, $this->id);
+
+            try{
                 // Execute query
                 $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                return $stmt;
+                if($row) {
+                    // Set Properties
+                    $this->id = $row['id'];
+                    $this->author = $row['author'];
+                    return true;
+                } else {
+                    return false;
+                }
+            }catch(PDOException $e) {
+                echo json_encode(array('message' => $e->getmessage()));
             }
+        }
 
-            // // Get Single authors
-            // public function read_single(){
-            //     // Create Query
-            //     $query = 'SELECT 
-            //         c.name as category_name, 
-            //         p.id, 
-            //         p.category_id, 
-            //         p.title, 
-            //         p.body, 
-            //         p.author, 
-            //         p.created_at
-            //     FROM 
-            //         ' . $this->table . ' p
-            //     LEFT JOIN
-            //         categories c ON p.category_id = c.id
-            //     WHERE 
-            //         p.id = ?
-            //     LIMIT 0,1';
+        // Create authors
+        public function create(){
+            // Create query
+            $query = 'INSERT INTO ' . 
+                $this->table. '
+            SET
+                author = :author';
 
-            //     // Prepare Statement
-            //     $stmt = $this->conn->prepare($query);
+            // Prepare Statement
+            $stmt = $this->conn->prepare($query);
 
-            //     // Bind ID
-            //     $stmt->bindParam(1, $this->id);
+            // Clean Data
+            $this->author = htmlspecialchars(strip_tags($this->author));
 
-            //     // Execute query
-            //     $stmt->execute();
+            // Bind Data
+            $stmt->bindParam(':author', $this->author);
 
-            //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Execute query
+            try {
+                $stmt->execute();
+                return true;
+            } catch(PDOException $e) {
+                echo json_encode(array('message' => $e->getmessage()));
+            }
+            
+        }
 
-            //     // Set Properties
-            //     $this->title = $row['title'];
-            //     $this->body = $row['body'];
-            //     $this->author = $row['author'];
-            //     $this->category_id = $row['category_id'];
-            //     $this->category_name = $row['category_name'];
-            // }
+        // Update author
+        public function Update(){
+            // Create query
+            $query = 'UPDATE ' . 
+                $this->table. '
+            SET
+                author = :author,
+            WHERE
+                id = :id';
 
-            // // Create authors
-            // public function create(){
-            //     // Create query
-            //     $query = 'INSERT INTO ' . 
-            //         $this->table. '
-            //     SET
-            //         title = :title,
-            //         body = :body,
-            //         author = :author,
-            //         category_id = :category_id';
+            // Prepare Statement
+            $stmt = $this->conn->prepare($query);
 
-            //     // Prepare Statement
-            //     $stmt = $this->conn->prepare($query);
+            // Clean Data
+            $this->author = htmlspecialchars(strip_tags($this->author));
+        
+            // Bind Data
+            $stmt->bindParam(':id', $this->id);
+            $stmt->bindParam(':author', $this->author);
 
-            //     // Clean Data
-            //     $this->title = htmlspecialchars(strip_tags($this->title));
-            //     $this->body = htmlspecialchars(strip_tags($this->body));
-            //     $this->author = htmlspecialchars(strip_tags($this->author));
-            //     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+            try{
+                $stmt->execute();
+                return $stmt;
+            } catch(PDOException $e) {
+                echo json_encode(
+                    array('message' => $e->getmessage()));                    
+            } 
+        }
 
-            //     // Bind Data
-            //     $stmt->bindParam(':title', $this->title);
-            //     $stmt->bindParam(':body', $this->body);
-            //     $stmt->bindParam(':author', $this->author);
-            //     $stmt->bindParam(':category_id', $this->category_id);
+        // Delete Author
+        public function delete(){
+            // Create query
+            $query = 'DELETE FROM ' . 
+                $this->table. ' 
+            WHERE 
+                id = :id';
 
-            //     // Execute query
-            //     if($stmt->execute()){
-            //         return true;
-            //     }
+            // Prepare Statement
+            $stmt = $this->conn->prepare($query);
 
-            //     // Print error if something goes wrong
-            //     printf("Error: %s.\n", $stmt->error);
+            // Clean Data
+            $this->id = htmlspecialchars(strip_tags($this->id));
 
-            //     return false;
+            // Bind Date 
+            $stmt->bindParam(':id', $this->id);
 
-            // }
-
-            // // Update Post
-            // public function Update(){
-            //     // Create query
-            //     $query = 'UPDATE ' . 
-            //         $this->table. '
-            //     SET
-            //         title = :title,
-            //         body = :body,
-            //         author = :author,
-            //         category_id = :category_id
-            //     WHERE
-            //         id = :id';
-
-            //     // Prepare Statement
-            //     $stmt = $this->conn->prepare($query);
-
-            //     // Clean Data
-            //     $this->title = htmlspecialchars(strip_tags($this->title));
-            //     $this->body = htmlspecialchars(strip_tags($this->body));
-            //     $this->author = htmlspecialchars(strip_tags($this->author));
-            //     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-            //     $this->id = htmlspecialchars(strip_tags($this->id));
-
-
-            //     // Bind Data
-            //     $stmt->bindParam(':title', $this->title);
-            //     $stmt->bindParam(':body', $this->body);
-            //     $stmt->bindParam(':author', $this->author);
-            //     $stmt->bindParam(':category_id', $this->category_id);
-            //     $stmt->bindParam(':id', $this->id);
-
-            //     // Execute query
-            //     if($stmt->execute()){
-            //         return true;
-            //     }
-
-            //     // Print error if something goes wrong
-            //     printf("Error: %s.\n", $stmt->error);
-
-            //     return false;
-
-            // }
-
-            // // Delete Post
-            // public function delete(){
-            //     // Create query
-            //     $query = 'DELETE FROM ' . $this->table. ' WHERE id = :id';
-
-            //     // Prepare Statement
-            //     $stmt = $this->conn->prepare($query);
-
-            //     // Clean Data
-            //     $this->id = htmlspecialchars(strip_tags($this->id));
-
-            //     // Bind Date 
-            //     $stmt->bindParam(':id', $this->id);
-
-
-            //     // Execute query
-            //     if($stmt->execute()){
-            //         return true;
-            //     }
-
-            //     // Print error if something goes wrong
-            //     printf("Error: %s.\n", $stmt->error);
-
-            //     return false;
-            // }
-
+            // Execute query
+            try{
+                $stmt->execute();
+                return $stmt;
+            } catch(PDOException $e) {
+                echo json_encode(
+                    array('message' => $e->getmessage()));                    
+            } 
+        }
     }
+            

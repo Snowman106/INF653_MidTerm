@@ -1,4 +1,5 @@
 <?php
+
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: applications/json');
     $method = $_SERVER['REQUEST_METHOD'];
@@ -8,18 +9,58 @@
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
     }
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <Head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IEedge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Justin Snowden INF 651 Midterm</title>
-    </head>
-    <body>
-        <h1>
-            <P>Justin Snowden INF 651 Midterm</p>
-        </h1>  
-    </body>
-    </html>
+    
+    // Include Files    
+    require '../../config/Database.php';
+    require '../../models/Quote.php';
+    require '../../functions/isValid.php';
+
+    // Instantiate DB and Connect
+    $database = new Database();
+    $db = $database->connect();
+
+    // Instantiate Quote Object
+    $quote = new Quote($db);
+
+    // Get Raw JSON data
+    $data = json_decode(file_get_contents("php://input"));
+
+    // Declare Variable for Isset
+    if(isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $quote = isValid($id, $quote);
+    } elseif (isset($data->id)) {
+        $id = $data->id;
+        $quotesExists = isValid($id, $quote);
+    }
+
+switch($method) {
+    case "GET":
+        if(isset($id)) {
+            if(!$quotesExists){
+                echo json_encode(array('message' => 'quoteID NOT Found'));
+            } else {
+                include_once 'read_single.php';
+            }
+        } else {
+            include_once 'read.php';
+        }
+        break;
+    case "POST":
+        include_once 'create.php';
+        break;
+    case "PUT":
+        if(!$quotesExists) {
+            echo json_encode(array('message' => 'quoteID NOT Found'));
+        } else {
+            include_once 'update.php';
+        }
+        break;
+    case "DELETE":
+        IF(!$quotesExists){
+            echo json_encode(array('message' => 'quoteID NOT Found'));
+        } else {
+            include_once 'delete.php';
+        }
+        break;
+}

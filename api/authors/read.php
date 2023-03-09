@@ -1,6 +1,6 @@
 <?php
 
-    // Post author query
+    // Author query
     $result = $author->read();
 
     // Get row count
@@ -15,7 +15,7 @@
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             extract($row);
 
-            $author = array(
+            $author_item = array(
                 'id' => $id,
                 'author' => $author,
             );
