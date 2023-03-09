@@ -1,4 +1,3 @@
-<!-- database for render  -->
 
 <?php
     class Database{
