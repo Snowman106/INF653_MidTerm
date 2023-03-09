@@ -1,7 +1,7 @@
 
 <?php
 
-// Validates Author is in database
+// Validates IDs 
 function isValid($id, $model) {
     $model->id = $id;   
     $result = $model->read_single();
