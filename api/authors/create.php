@@ -1,15 +1,21 @@
 <?php
 
+echo json_encode(array('message' => 'create called'));
 // Check Parameters
 if(!property_exists($data, 'author')) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
 } else {
     
+    echo json_encode(array('message' => 'Else started'));
     // Set Author to Create
     $author->author = $data->author;
 
     // Create Author
-    $author->create();
+    if($author->create()){
+        echo json_encode(array('message' => 'Author Created'));
+    } else {
+        echo json_encode(array('message' => 'Author NOT Created'));
+    }
 
     // Create Author JSON data
     $author_arr = array (
@@ -17,5 +23,5 @@ if(!property_exists($data, 'author')) {
         'author' => $author->author
     );
 
-    print_r(json_encode($author_arr));
+    echo (json_encode($author_arr));
 }

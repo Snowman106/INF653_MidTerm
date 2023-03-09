@@ -12,7 +12,7 @@
     
     // Include Files    
     require '../../config/Database.php';
-    require '../../models/Author.php';
+    require '../../Models/Author.php';
     require '../../functions/isValid.php';
 
     // Instantiate DB and Connect
@@ -36,22 +36,29 @@
         $id = $data->id;        
         $authorsExists = isValid($id, $author);
     }
-
+    
+    echo json_encode(array('message' => 'method: ' . $method));
     switch($method) {
+        case "POST":
+            echo json_encode(array('message' => 'Posting used'));
+            include_once 'create.php';
+            break;
         case "GET":
+            echo json_encode(array('message' => 'GET USED'));
             if(isset($id)) {
                 if(!$authorsExists){
                     echo json_encode(array('message' => 'authorID NOT Found'));
                 } else {
+                    echo json_encode(array('message' => 'Read_single called'));
                     include_once 'read_single.php';
                 }
             } else {
+                
+                echo json_encode(array('message' => 'Read called'));
                 include_once 'read.php';
             }
             break;
-        case "POST":
-            include_once 'create.php';
-            break;
+        
         case "PUT":
             if(!$authorsExists) {
                 echo json_encode(array('message' => 'authorID NOT Found'));

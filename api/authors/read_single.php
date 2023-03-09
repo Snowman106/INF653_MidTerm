@@ -1,6 +1,5 @@
 <?php
 
-
     // Get Author
     $author->read_single(); 
 

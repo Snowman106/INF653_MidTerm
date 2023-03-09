@@ -46,7 +46,7 @@
                 . $this->table . 
             ' WHERE 
                 id = ? 
-            LIMIT 1 OFFSET 0';
+            LIMIT 1 OFFSET 0';  // this was different for postgreSQL than mySQL
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
@@ -74,6 +74,7 @@
 
         // Create authors
         public function create(){
+            echo json_encode(array('message' => 'Create called'));
             // Create query
             $query = 'INSERT INTO ' . 
                 $this->table. '
