@@ -5,7 +5,7 @@
     $method = $_SERVER['REQUEST_METHOD'];
     echo json_encode(array('message' => 'method: ' . $method));
 
-    if($method == 'OPTIONS') {
+    if($method === 'OPTIONS') {
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
@@ -38,10 +38,9 @@
         $authorsExists = isValid($id, $author);
     }
     
-    echo json_encode(array('message' => 'method: ' . $method));
     switch($method) {
         case "POST":
-            echo json_encode(array('message' => 'Posting used'));
+            echo json_encode(array('message' => 'POST USED'));
             include_once 'create.php';
             break;
         case "GET":
