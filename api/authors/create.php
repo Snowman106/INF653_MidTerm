@@ -10,7 +10,7 @@ if(!property_exists($data, 'author')) {
 
     // Create Author
     if($author->create()){
-        echo json_encode(array('message' => 'Author Created'));
+        // echo json_encode(array('message' => 'Author Created'));
     } else {
         echo json_encode(array('message' => 'Author NOT Created'));
     }

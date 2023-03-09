@@ -77,9 +77,7 @@
             // Create query
             
             $query = 'INSERT INTO ' . 
-                $this->table . '
-            VALUES
-                author = :author';
+                $this->table . ' (author) VALUES (:author)';
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
