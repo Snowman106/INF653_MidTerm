@@ -74,7 +74,6 @@
 
         // Create authors
         public function create(){
-            echo json_encode(array('message' => 'Create called'));
             // Create query
             $query = 'INSERT INTO ' . 
                 $this->table. '
@@ -124,8 +123,7 @@
                 $stmt->execute();
                 return $stmt;
             } catch(PDOException $e) {
-                echo json_encode(
-                    array('message' => $e->getmessage()));                    
+                echo json_encode(array('message' => $e->getmessage()));                    
             } 
         }
 
@@ -151,8 +149,7 @@
                 $stmt->execute();
                 return $stmt;
             } catch(PDOException $e) {
-                echo json_encode(
-                    array('message' => $e->getmessage()));                    
+                echo json_encode(array('message' => $e->getmessage()));                    
             } 
         }
     }

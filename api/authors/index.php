@@ -3,7 +3,6 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     $method = $_SERVER['REQUEST_METHOD'];
-    // echo json_encode(array('message' => 'method: ' . $method));
 
     if($method === 'OPTIONS') {
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -40,21 +39,16 @@
     
     switch($method) {
         case "POST":
-            // echo json_encode(array('message' => 'POST USED'));
             include_once 'create.php';
             break;
         case "GET":
-            // echo json_encode(array('message' => 'GET USED'));
             if(isset($id)) {
                 if(!$authorsExists){
                     echo json_encode(array('message' => 'authorID NOT Found'));
                 } else {
-                    // echo json_encode(array('message' => 'Read_single called'));
                     include_once 'read_single.php';
                 }
             } else {
-                
-                // echo json_encode(array('message' => 'Read called'));
                 include_once 'read.php';
             }
             break;
