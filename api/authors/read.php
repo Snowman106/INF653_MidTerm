@@ -8,6 +8,7 @@
 
     // Check if any author
     if($num > 0) {
+        
         // Author array
         $author_arr = array();
 

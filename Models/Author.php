@@ -75,9 +75,10 @@
         // Create authors
         public function create(){
             // Create query
+            
             $query = 'INSERT INTO ' . 
-                $this->table. '
-            SET
+                $this->table . '
+            VALUES
                 author = :author';
 
             // Prepare Statement

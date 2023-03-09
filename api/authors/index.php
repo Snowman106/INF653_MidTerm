@@ -37,17 +37,12 @@
         $authorsExists = isValid($id, $author);
     }
     
-    echo json_encode(array('message' => $method));
     switch($method) {
         case "POST":
-            
-        echo json_encode(array('message' => $method));
             include_once 'create.php';
             break;
         case "GET":
             if(isset($id)) {
-                
-        echo json_encode(array('message' => $method));
                 if(!$authorsExists){
                     echo json_encode(array('message' => 'authorID NOT Found'));
                 } else {
@@ -73,3 +68,4 @@
             }
             break;
     }
+    
