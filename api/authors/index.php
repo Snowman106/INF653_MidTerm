@@ -1,5 +1,4 @@
 <?php
-
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     $method = $_SERVER['REQUEST_METHOD'];
@@ -10,10 +9,11 @@
         exit();
     }
     
+    //echo json_encode(array('message' => 'looking for extra space'));
     // Include Files    
-    require '../../config/Database.php';
-    require '../../Models/Author.php';
-    require '../../functions/isValid.php';
+    include_once '../../config/Database.php';
+    include_once '../../Models/Author.php';
+    include_once '../../functions/isValid.php';
 
     // Instantiate DB and Connect
     $database = new Database();

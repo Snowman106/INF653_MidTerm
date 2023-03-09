@@ -1,5 +1,5 @@
 <?php
-
+    
     // Author query
     $result = $author->read();
 
