@@ -3,6 +3,7 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     $method = $_SERVER['REQUEST_METHOD'];
+    echo json_encode(array('message' => 'method: ' . $method));
 
     if($method == 'OPTIONS') {
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
