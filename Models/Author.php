@@ -31,13 +31,13 @@
                 $stmt->execute();
                 return $stmt;
             } catch(PDOException $e) {
-                echo json_encode(
-                    array('message' => $e->getmessage()));                    
+                echo json_encode(array('message' => $e->getmessage()));                    
             }           
         }
 
         // Get Single authors
-        public function read_single(){
+        public function read_single(){            
+            
             // Create Query
             $query = 'SELECT 
                 id,
@@ -45,7 +45,8 @@
             FROM '
                 . $this->table . 
             ' WHERE 
-                id = ? LIMIT 0,1';
+                id = ? 
+            LIMIT 1 OFFSET 0';
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);

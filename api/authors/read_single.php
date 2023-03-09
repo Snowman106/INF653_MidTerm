@@ -1,15 +1,13 @@
 <?php
 
-// Get Author
-$author->read_single(); 
 
-// create array for JSON data
-$author_arr = array (
-    'id' => $author->id,
-    'author' => $author->author
-);
+    // Get Author
+    $author->read_single(); 
 
-// convert to JSON
-print_r(json_encode($author_arr));
+    // Create array
+    $author_arr = array(
+        'id' => $author->id,
+        'author' => $author->author);
 
-
+    // Make JSON
+    echo json_encode($author_arr);

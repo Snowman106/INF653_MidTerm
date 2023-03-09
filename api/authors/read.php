@@ -21,7 +21,7 @@
             );
 
             // Push to "data"
-            array_push($author_arr['data'], $author_item);
+            array_push($author_arr['data'],$author_item);
         }
 
         // Turn to JSON & output

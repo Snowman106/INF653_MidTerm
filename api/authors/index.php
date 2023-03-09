@@ -25,12 +25,15 @@
     // Get Raw JSON data
     $data = json_decode(file_get_contents("php://input"));
 
+    // Variable for isset
+    $id;
+
     // Get ID if Set
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
         $authorsExists = isValid($id, $author);
     } elseif (isset($data->id)) {
-        $id = $data->id;
+        $id = $data->id;        
         $authorsExists = isValid($id, $author);
     }
 
@@ -40,7 +43,7 @@
                 if(!$authorsExists){
                     echo json_encode(array('message' => 'authorID NOT Found'));
                 } else {
-                    include_once 'read.single.php';
+                    include_once 'read_single.php';
                 }
             } else {
                 include_once 'read.php';
