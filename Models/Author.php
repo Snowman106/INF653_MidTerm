@@ -18,8 +18,7 @@
         public function read(){
             // Create Query
             $query = 'SELECT 
-                id,
-                author
+                *
             FROM '
                 . $this->table;
 
