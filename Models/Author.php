@@ -17,11 +17,7 @@
         // Get authors
         public function read(){
             // Create Query
-            $query = 'SELECT 
-                id, 
-                author
-            FROM 
-                ' . $this->table;
+            $query = 'SELECT id, author FROM ' . $this->table;
 
             // Prepared Statements
             $stmt = $this->conn->prepare($query);
@@ -39,14 +35,7 @@
         public function read_single(){            
             
             // Create Query
-            $query = 'SELECT 
-                id,
-                author
-            FROM '
-                . $this->table . 
-            ' WHERE 
-                id = ? 
-            LIMIT 1 OFFSET 0';  // this was different for postgreSQL than mySQL
+            //$query = 'SELECT id, author FROM ' . $this->table . ' WHERE id = ? LIMIT 1 OFFSET 0';  // this was different for postgreSQL than mySQL
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
