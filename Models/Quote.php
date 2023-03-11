@@ -67,7 +67,7 @@
             LEFT JOIN 
                 categories c ON q.category_id = c.id 
             LEFT JOIN 
-                authors a ON qauthor_id = a.id 
+                authors a ON q.author_id = a.id 
             WHERE 
                 q.id = ? 
             LIMIT 1 OFFSET 0';
