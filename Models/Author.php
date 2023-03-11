@@ -101,12 +101,7 @@
         // Update author
         public function Update(){
             // Create query
-            $query = 'UPDATE ' . 
-                $this->table. '
-            SET
-                author = :author,
-            WHERE
-                id = :id';
+            $query = 'UPDATE ' . $this->table . ' SET author = :author WHERE id = :id';
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
