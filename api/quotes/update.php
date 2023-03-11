@@ -6,8 +6,8 @@ include_once '../../Models/Category.php';
 
 // Check Parameters
 if(!property_exists($data, 'quote') 
-&& !property_exists($data, 'authorId')
-&& !property_exists($data, 'categoryId')) {
+&& !property_exists($data, 'author_id')
+&& !property_exists($data, 'category_id')) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
 
 } else {
@@ -16,15 +16,15 @@ if(!property_exists($data, 'quote')
     $author = new Author($db);
     $category = new Category($db);
     
-    if(!isValid($data->authorId, $author)) {
+    if(!isValid($data->author_id, $author)) {
         echo json_encode(array('message' => 'author_id Not Found'));
-    } elseif(!isValid($data->categoryId, $category)){        
+    } elseif(!isValid($data->category_id, $category)){        
         echo json_encode(array('message' => 'category_id Not Found'));
     } else { 
         // Set Quote to Update
         $quote->quote = $data->quote;
-        $quote->authorId = $data->authorId;
-        $quote->categoryId = $data->categoryId;
+        $quote->author_id = $data->author_id;
+        $quote->category_id = $data->category_id;
 
         if($quote->update()){
 
@@ -36,8 +36,8 @@ if(!property_exists($data, 'quote')
         $quote_arr = array (
             'id' => $quote->id,
             'quote' => $quote->quote, 
-            'authorId' => $quote->authorId,
-            'categoryId' => $quote->categoryId
+            'author_id' => $quote->author_id,
+            'category_id' => $quote->category_id
         );
 
         echo json_encode($quote_arr);

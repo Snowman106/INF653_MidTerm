@@ -25,11 +25,6 @@
     // Get Raw JSON data
     $data = json_decode(file_get_contents("php://input"));
 
-    // Declare Variable for Isset
-    // $id;
-    // $authorId;
-    // $categoryId;
-
     // Get ID if Set
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
@@ -44,14 +39,14 @@
     }
 
    
-    if(isset($_GET['authorId'])){
-        $authorId = $_GET['authorId'];
+    if(isset($_GET['author_id'])){
+        $author_id = $_GET['author_id'];
     } else {
         //echo json_encode(array('message' => 'author_Id NOT Found in isset'));
     }
 
-    if(isset($_GET['categoryId'])){
-        $categoryId = $_GET['categoryId'];
+    if(isset($_GET['category_id'])){
+        $category_id = $_GET['category_id'];
     } else {
        // echo json_encode(array('message' => 'Category_Id NOT Found in isset'));
     }

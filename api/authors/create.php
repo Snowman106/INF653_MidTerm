@@ -21,5 +21,5 @@ if(!property_exists($data, 'author')) {
         'author' => $author->author
     );
 
-    echo (json_encode($author_arr));
+    echo json_encode($author_arr);
 }

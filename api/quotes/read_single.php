@@ -1,6 +1,6 @@
 <?php
 
-    // Get Category
+    // Get quote
     $quote->read_single(); 
 
     // Create array
