@@ -1,25 +1,24 @@
 <?php
-
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     $method = $_SERVER['REQUEST_METHOD'];
 
-    if($method == 'OPTIONS') {
+    if($method === 'OPTIONS') {
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
     }
 
     // Include files
-    require '../../config/Database.php';
-    require '../../models/Category.php';
-    require '../../functions/isValid.php';
+    include_once '../../config/Database.php';
+    include_once '../../Models/Category.php';
+    include_once '../../functions/isValid.php';
 
     // instantiate DB and connect
     $database = new Database();
     $db = $database->connect();
 
-    // instantiate author object
+    // instantiate Category object
     $category = new Category($db);
 
     // Get Raw JSON data
@@ -37,10 +36,10 @@
     switch($method) {    
         case "GET":
             if(isset($id)) {
-                if(!$categoriesExists){
-                    echo json_encode(array('message' => 'authorID NOT Found'));
+                if(!$categoryExists){
+                    echo json_encode(array('message' => 'categoryID NOT Found'));
                 } else {
-                    include_once 'read.single.php';
+                    include_once 'read_single.php';
                 }
             } else {
                 include_once 'read.php';

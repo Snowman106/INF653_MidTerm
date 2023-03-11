@@ -39,13 +39,8 @@
         // Get Single Categories
         public function read_single(){
             // Create Query
-            $query = 'SELECT 
-                id,
-                category
-            FROM '
-                . $this->table . 
-            ' WHERE 
-                id = ? LIMIT 0,1';
+            $query = 'SELECT id, category FROM ' . $this->table . ' WHERE id = ? LIMIT 1 OFFSET 0';  // this was different for postgreSQL than mySQL
+
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
@@ -74,10 +69,7 @@
         // Create Categories
         public function create(){
             // Create query
-            $query = 'INSERT INTO ' . 
-                $this->table. '
-            SET
-                category = :category';
+            $query = 'INSERT INTO ' . $this->table . ' (category) VALUES (:category)';
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
@@ -101,12 +93,8 @@
         // Update category
         public function Update(){
             // Create query
-            $query = 'UPDATE ' . 
-                $this->table. '
-            SET
-                category = :category,
-            WHERE
-                id = :id';
+            $query = 'UPDATE ' . $this->table . ' SET category = :category WHERE id = :id';
+
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);

@@ -9,7 +9,6 @@
         exit();
     }
     
-    //echo json_encode(array('message' => 'looking for extra space'));
     // Include Files    
     include_once '../../config/Database.php';
     include_once '../../Models/Author.php';
@@ -19,7 +18,7 @@
     $database = new Database();
     $db = $database->connect();
 
-    // Instantiate author Object
+    // Instantiate Author Object
     $author = new Author($db);
 
     // Get Raw JSON data
@@ -38,9 +37,6 @@
     }
     
     switch($method) {
-        case "POST":
-            include_once 'create.php';
-            break;
         case "GET":
             if(isset($id)) {
                 if(!$authorsExists){
@@ -52,7 +48,9 @@
                 include_once 'read.php';
             }
             break;
-        
+        case "POST":
+            include_once 'create.php';
+            break;
         case "PUT":
             if(!$authorsExists) {
                 echo json_encode(array('message' => 'authorID NOT Found'));
