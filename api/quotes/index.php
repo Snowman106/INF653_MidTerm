@@ -42,13 +42,13 @@
     if(isset($_GET['author_id'])){
         $author_id = $_GET['author_id'];
     } else {
-        //echo json_encode(array('message' => 'author_Id NOT Found in isset'));
+        //echo json_encode(array('message' => 'author_id NOT Found in isset'));
     }
 
     if(isset($_GET['category_id'])){
         $category_id = $_GET['category_id'];
     } else {
-       // echo json_encode(array('message' => 'Category_Id NOT Found in isset'));
+       // echo json_encode(array('message' => 'Category_id NOT Found in isset'));
     }
 
 
