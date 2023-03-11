@@ -17,10 +17,7 @@
         // Get authors
         public function read(){
             // Create Query
-            $query = 'SELECT 
-                *
-            FROM '
-                . $this->table;
+            $query = 'SELECT id, author FROM '. $this->table;
 
             // Prepared Statements
             $stmt = $this->conn->prepare($query);
