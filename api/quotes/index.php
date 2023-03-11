@@ -12,7 +12,7 @@
     
     // Include Files    
     require '../../config/Database.php';
-    require '../../models/Quote.php';
+    require '../../Models/Quote.php';
     require '../../functions/isValid.php';
 
     // Instantiate DB and Connect
