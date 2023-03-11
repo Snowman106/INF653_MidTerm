@@ -29,7 +29,7 @@ if(!property_exists($data, 'quote')
         if($quote->update()){
 
         } else {
-            echo json_encode(array('message' => 'Quote NOT updated'));
+            echo json_encode(array('message' => 'No Quotes Found'));
         }
 
         // Create Quote JSON data

@@ -31,7 +31,7 @@ if(!property_exists($data, 'quote')
             // Create Quote
         if($quote->create()){
         } else {
-            echo json_encode(array('message' => 'Quote NOT Created'));
+            echo json_encode(array('message' => 'No Quotes Found'));
         }
 
         // Create Quote JSON data

@@ -61,7 +61,7 @@ switch($method) {
     case "GET":
         if(isset($id)) {
             if(!$quotesExist){
-                echo json_encode(array('message' => 'quote_ID NOT Found'));
+                echo json_encode(array('message' => 'No Quotes Found'));
             } else {
                 include_once 'read_single.php';
             }
