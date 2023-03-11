@@ -1,15 +1,14 @@
 <?php
 
-// Get Quote
-$quote->read_single();
+    // Get Category
+    $quote->read_single(); 
 
-// create array for JSON data
-$quote_arr = array (
-    'id' => $quote->id,
-    'quote' => $quote->quote,
-    'author' => $quote->author,
-    'category' => $quote->category
-);
+    // Create array
+    $quote_arr = array(
+        'id' => $quote->id,
+        'quote' => $quote->quote,
+        'author' => $quote->author,
+        'category' => $quote->category);
 
-// convert to JSON
-print_r(json_encode($quote_arr));
+    // Make JSON
+    echo json_encode($quote_arr);

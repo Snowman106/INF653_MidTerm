@@ -4,16 +4,16 @@
     header('Content-Type: applications/json');
     $method = $_SERVER['REQUEST_METHOD'];
 
-    if($method == 'OPTIONS'){
+    if($method === 'OPTIONS'){
         header('Access-Control-Allow_Methods: GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
     }
     
     // Include Files    
-    require '../../config/Database.php';
-    require '../../Models/Quote.php';
-    require '../../functions/isValid.php';
+    include_once '../../config/Database.php';
+    include_once '../../Models/Quote.php';
+    include_once '../../functions/isValid.php';
 
     // Instantiate DB and Connect
     $database = new Database();
@@ -26,19 +26,42 @@
     $data = json_decode(file_get_contents("php://input"));
 
     // Declare Variable for Isset
+    // $id;
+    // $authorId;
+    // $categoryId;
+
+    // Get ID if Set
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
-        $quote = isValid($id, $quote);
+        $quotesExist = isValid($id, $quote);
+        //echo json_encode(array('message' => 'get ID'));
     } elseif (isset($data->id)) {
         $id = $data->id;
-        $quotesExists = isValid($id, $quote);
+        $quotesExist = isValid($id, $quote);
+        //echo json_encode(array('message' => 'data ID'));
+    } else {
+        echo json_encode(array('message' => 'no ID set'));
     }
+
+   
+    if(isset($_GET['authorId'])){
+        $authorId = $_GET['authorId'];
+    } else {
+        //echo json_encode(array('message' => 'author_Id NOT Found in isset'));
+    }
+
+    if(isset($_GET['categoryId'])){
+        $categoryId = $_GET['categoryId'];
+    } else {
+       // echo json_encode(array('message' => 'Category_Id NOT Found in isset'));
+    }
+
 
 switch($method) {
     case "GET":
         if(isset($id)) {
-            if(!$quotesExists){
-                echo json_encode(array('message' => 'quoteID NOT Found'));
+            if(!$quotesExist){
+                echo json_encode(array('message' => 'quote_ID NOT Found'));
             } else {
                 include_once 'read_single.php';
             }
@@ -50,15 +73,15 @@ switch($method) {
         include_once 'create.php';
         break;
     case "PUT":
-        if(!$quotesExists) {
-            echo json_encode(array('message' => 'quoteID NOT Found'));
+        if(!$quotesExist) {
+            echo json_encode(array('message' => 'quote_ID NOT Found'));
         } else {
             include_once 'update.php';
         }
         break;
     case "DELETE":
-        IF(!$quotesExists){
-            echo json_encode(array('message' => 'quoteID NOT Found'));
+        IF(!$quotesExist){
+            echo json_encode(array('message' => 'quote_ID NOT Found'));
         } else {
             include_once 'delete.php';
         }

@@ -18,8 +18,9 @@
 
         // Get Quotes
         public function read(){
+            
             // Create Query
-            $query = "SELECT 
+            $query = 'SELECT 
                 c.category AS category, 
                 q.id, 
                 q.categoryId, 
@@ -27,19 +28,21 @@
                 q.authorId,
                 q.quote
             FROM 
-                " . $this->table . " q
+                ' . $this->table . ' q
             LEFT JOIN 
                 categories c ON q.categoryId = c.id
             LEFT JOIN 
                 authors a ON q.authorId = a.id
             ORDER BY 
-                q.id";
+                q.id';
                 
             // prepared statement
             $stmt = $this->conn->prepare($query);
 
             try {
                 // execute query
+                
+                
                 $stmt->execute();
                 return $stmt;
             } catch(PDOException $e) {
@@ -53,12 +56,21 @@
         public function read_single(){
             // Create Query
             $query = 'SELECT 
-                id,
-                quote
-            FROM '
-                . $this->table . 
-            ' WHERE 
-                id = ? LIMIT 0,1';
+                c.category AS category, 
+                q.id, 
+                q.categoryId, 
+                a.author AS author, 
+                q.authorId, 
+                q.quote 
+            FROM 
+                ' . $this->table . ' q 
+            LEFT JOIN 
+                categories c ON q.categoryId = c.id 
+            LEFT JOIN 
+                authors a ON q.authorId = a.id 
+            WHERE 
+                q.id = ? 
+            LIMIT 1 OFFSET 0';
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
@@ -75,6 +87,8 @@
                     // Set Properties
                     $this->id = $row['id'];
                     $this->quote = $row['quote'];
+                    $this->author = $row['author'];
+                    $this->category = $row['category'];
                     return true;
                 } else {
                     return false;
@@ -84,22 +98,26 @@
             }
         }
 
-        // Create Quotess
+        // Create Quotes
         public function create(){
             // Create query
-            $query = 'INSERT INTO ' . 
-                $this->table. '
-            SET
-                quote = :quote';
+            $query = 'INSERT INTO ' . $this->table . 
+                ' (quote, authorId, categoryId) 
+            VALUES 
+                (:quote, :authorId, :categoryId)';
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
 
             // Clean Data
             $this->quote = htmlspecialchars(strip_tags($this->quote));
+            $this->authorId = htmlspecialchars(strip_tags($this->authorId));
+            $this->categoryId = htmlspecialchars(strip_tags($this->categoryId));
 
             // Bind Data
             $stmt->bindParam(':quote', $this->quote);
+            $stmt->bindParam(':authorId', $this->authorId);
+            $stmt->bindParam(':categoryId', $this->categoryId);
 
             // Execute query
             try {
@@ -114,22 +132,29 @@
         // Update quote
         public function Update(){
             // Create query
-            $query = 'UPDATE ' . 
-                $this->table. '
-            SET
-                quote = :quote,
-            WHERE
+            $query = 'UPDATE ' . $this->table. ' 
+            SET 
+                quote = :quote, 
+                authorId = :authorId,
+                categoryId = :categoryId
+            WHERE 
                 id = :id';
 
             // Prepare Statement
             $stmt = $this->conn->prepare($query);
 
             // Clean Data
+            $this->id = htmlspecialchars(strip_tags($this->id));
             $this->quote = htmlspecialchars(strip_tags($this->quote));
+            $this->authorId = htmlspecialchars(strip_tags($this->authorId));
+            $this->categoryId = htmlspecialchars(strip_tags($this->categoryId));
         
             // Bind Data
             $stmt->bindParam(':id', $this->id);
             $stmt->bindParam(':quote', $this->quote);
+            $stmt->bindParam(':authorId', $this->authorId);
+            $stmt->bindParam(':categoryId', $this->categoryId);
+            
 
             try{
                 $stmt->execute();
