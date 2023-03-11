@@ -50,14 +50,14 @@
             break;
         case "PUT":
             if(!$categoryExists) {
-                echo json_encode(array('message' => 'categoryId Not Found'));
+                echo json_encode(array('message' => 'category_id Not Found'));
             } else {
                 include_once 'update.php';
             }
             break;
         case "DELETE": 
             if(!$categoryExists) {
-                echo json_encode(array('message' => 'categoryId Not Found'));
+                echo json_encode(array('message' => 'category_id Not Found'));
             } else {
             include_once 'delete.php';
             }
