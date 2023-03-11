@@ -53,14 +53,14 @@
             break;
         case "PUT":
             if(!$authorsExists) {
-                echo json_encode(array('message' => 'authorID NOT Found'));
+                echo json_encode(array('message' => 'author_id Not Found'));
             } else {
                 include_once 'update.php';
             }
             break;
         case "DELETE":
             IF(!$authorsExists){
-                echo json_encode(array('message' => 'authorID NOT Found'));
+                echo json_encode(array('message' => 'author_id Not Found'));
             } else {
                 include_once 'delete.php';
             }
