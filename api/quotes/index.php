@@ -40,7 +40,7 @@
         $quotesExist = isValid($id, $quote);
         //echo json_encode(array('message' => 'data ID'));
     } else {
-        echo json_encode(array('message' => 'no ID set'));
+        // echo json_encode(array('message' => 'no ID set'));
     }
 
    
