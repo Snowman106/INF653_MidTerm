@@ -18,10 +18,10 @@
         public function read(){
             // Create Query
             $query = 'SELECT 
-                id, 
-                author 
-            FROM 
-                ' . $this->table;
+                id,
+                author
+            FROM '
+                . $this->table;
 
             // Prepared Statements
             $stmt = $this->conn->prepare($query);
