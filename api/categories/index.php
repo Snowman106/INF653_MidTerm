@@ -37,7 +37,7 @@
         case "GET":
             if(isset($id)) {
                 if(!$categoryExists){
-                    echo json_encode(array('message' => 'categoryID NOT Found'));
+                    echo json_encode(array('message' => 'category_id Not Found'));
                 } else {
                     include_once 'read_single.php';
                 }
