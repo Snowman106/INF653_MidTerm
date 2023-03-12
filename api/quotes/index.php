@@ -1,11 +1,10 @@
 <?php
-
     header('Access-Control-Allow-Origin: *');
-    header('Content-Type: applications/json');
+    header('Content-Type: application/json');
     $method = $_SERVER['REQUEST_METHOD'];
 
-    if($method === 'OPTIONS'){
-        header('Access-Control-Allow_Methods: GET, POST, PUT, DELETE');
+    if($method === 'OPTIONS') {
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
     }
@@ -25,19 +24,20 @@
     // Get Raw JSON data
     $data = json_decode(file_get_contents("php://input"));
 
+    $id;
+    $author_id;
+    $category_id;
+
     // Get ID if Set
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
         $quotesExist = isValid($id, $quote);
-        //echo json_encode(array('message' => 'get ID'));
+       // echo json_encode(array('message' => 'Get ID'));
     } elseif (isset($data->id)) {
         $id = $data->id;
         $quotesExist = isValid($id, $quote);
-        //echo json_encode(array('message' => 'data ID'));
-    } else {
-        // echo json_encode(array('message' => 'no ID set'));
-    }
-
+       // echo json_encode(array('message' => 'Data ID'));
+    } 
    
     if(isset($_GET['author_id'])){
         $author_id = $_GET['author_id'];
@@ -50,7 +50,6 @@
     } else {
        // echo json_encode(array('message' => 'Category_id NOT Found in isset'));
     }
-
 
 switch($method) {
     case "GET":
@@ -69,7 +68,7 @@ switch($method) {
         break;
     case "PUT":
         if(!$quotesExist) {
-            echo json_encode(array('message' => 'quote_ID NOT Found'));
+            echo json_encode(array('message' => 'quote_id NOT Found'));
         } else {
             include_once 'update.php';
         }

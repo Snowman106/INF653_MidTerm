@@ -14,11 +14,11 @@
     include_once '../../Models/Category.php';
     include_once '../../functions/isValid.php';
 
-    // instantiate DB and connect
+    // instantiate DB and Connect
     $database = new Database();
     $db = $database->connect();
 
-    // instantiate Category object
+    // Instantiate Category Object
     $category = new Category($db);
 
     // Get Raw JSON data

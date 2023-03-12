@@ -35,7 +35,8 @@
                 authors a ON q.author_id = a.id
             ORDER BY 
                 q.id';
-                
+             
+                 
             // prepared statement
             $stmt = $this->conn->prepare($query);
 
