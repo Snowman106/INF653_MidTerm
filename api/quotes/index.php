@@ -41,13 +41,17 @@
    
     if(isset($_GET['author_id'])){
         $author_id = $_GET['author_id'];
-    } else {        
+    } else {    
+        $author_id = $data->author_id;
+        $author_id = isValid($author_id, $quote);    
         // echo json_encode(array('message' => 'author_id Not Found'));
     }
 
     if(isset($_GET['category_id'])){
         $category_id = $_GET['category_id'];
     } else {
+        $category_id = $data->category_id;
+        $category_id = isValid($category_id, $quote); 
         // echo json_encode(array('message' => 'category_id Not Found'));
     }
 
