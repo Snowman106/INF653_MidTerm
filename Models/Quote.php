@@ -10,8 +10,6 @@
         public $quote;
         public $author_id;
         public $category_id;
-        public $author;
-        public $category;
 
         // Construct with DB
         public function __construct($db) {
