@@ -41,14 +41,14 @@
    
     if(isset($_GET['author_id'])){
         $author_id = $_GET['author_id'];
-    } else {    
-        // echo json_encode(array('message' => 'author_id Not Found'));
+    } else {
+        //echo json_encode(array('message' => 'author_id NOT Found in isset'));
     }
 
     if(isset($_GET['category_id'])){
         $category_id = $_GET['category_id'];
     } else {
-        // echo json_encode(array('message' => 'category_id Not Found'));
+       // echo json_encode(array('message' => 'Category_id NOT Found in isset'));
     }
 
 switch($method) {
@@ -64,23 +64,11 @@ switch($method) {
         }
         break;
     case "POST":
-        if(isset($author_id) && isset($category_id)){
-            if(!$authorExists){
-                echo json_encode(array('message' => 'author_id Not Found'));
-                break;
-            }            
-            if(!$categoryExists){
-                echo json_encode(array('message' => 'category_id Not Found'));
-                break;
-            } 
-        } else {
-            include_once 'create.php';
-            break;
-        }
-       
+        include_once 'create.php';
+        break;
     case "PUT":
         if(!$quotesExist) {
-            echo json_encode(array('message' => 'quote_id NOT Found'));
+            echo json_encode(array('message' => 'No Quotes Found'));
         } else {
             include_once 'update.php';
         }
