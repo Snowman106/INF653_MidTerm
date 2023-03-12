@@ -17,9 +17,9 @@ if(!property_exists($data, 'quote')
 
     // Validate Authors and Categories 
     if(!isValid($data->author_id, $author)) {
-        echo json_encode(array('message' => 'author_id Not Found double check'));
+        echo json_encode(array('message' => 'author_id Not Found'));
     } elseif(!isValid($data->category_id, $category)){        
-        echo json_encode(array('message' => 'category_id Not Found double check'));
+        echo json_encode(array('message' => 'category_id Not Found'));
     } else { 
         
         // Set Quote to Create
