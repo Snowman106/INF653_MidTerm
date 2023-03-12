@@ -64,17 +64,16 @@ switch($method) {
         }
         break;
     case "POST":
-        if(isset($author_id)){
-            if(isset($category_id)){
-                include_once 'create.php';
-            } else {
-                echo json_encode(array('message' => 'category_id Not Found'));
-            }
-
-        } else {
+        if(!isset($author_id)){
             echo json_encode(array('message' => 'author_id Not Found'));
+            break;
         }
-        
+        if(!isset($category_id)){
+                echo json_encode(array('message' => 'category_id Not Found'));
+                break;
+        }
+
+        include_once 'create.php';
         break;
     case "PUT":
         if(!$quotesExist) {
