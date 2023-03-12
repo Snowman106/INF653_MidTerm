@@ -75,7 +75,7 @@ switch($method) {
         break;
     case "DELETE":
         IF(!$quotesExist){
-            echo json_encode(array('message": 'No Quotes Found'));
+            echo json_encode(array('message' => 'No Quotes Found'));
         } else {
             include_once 'delete.php';
         }
