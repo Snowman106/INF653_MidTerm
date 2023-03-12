@@ -6,8 +6,8 @@ include_once '../../Models/Category.php';
 
 // Check Parameters
 if(!property_exists($data, 'quote') 
-&& !property_exists($data, 'author_id')
-&& !property_exists($data, 'category_id')) {
+|| !property_exists($data, 'author_id')
+|| !property_exists($data, 'category_id')) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
 } else {
 
@@ -16,7 +16,6 @@ if(!property_exists($data, 'quote')
     $category = new Category($db);
 
     // Validate Authors and Categories 
-    
     if(!isValid($data->author_id, $author)) {
         echo json_encode(array('message' => 'author_id Not Found'));
     } elseif(!isValid($data->category_id, $category)){        
