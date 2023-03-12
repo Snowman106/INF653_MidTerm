@@ -65,7 +65,7 @@ switch($method) {
         break;
     case "POST":
         if(isset($author_id)){
-            if(isset(category_id)){
+            if(isset($category_id)){
                 include_once 'create.php';
             } else {
                 echo json_encode(array('message' => 'category_id Not Found'));
