@@ -26,9 +26,6 @@
     // This pulls the commands from the Raw JSON entry 
     $data = json_decode(file_get_contents("php://input"));
 
-    // // Variable for isset
-    // $id;
-
     // Get ID if Set
     // Check if Authors exsist in the given model
     if(isset($_GET['id'])) {
