@@ -36,8 +36,6 @@
         // if no specific authors are in the URL the use the data collected
         $id = $data->id;
         $quotesExist = isValid($id, $quote);
-        
-        echo json_encode(array('message' => 'author_id is set'));
             
     } 
    
