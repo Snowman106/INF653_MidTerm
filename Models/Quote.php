@@ -101,6 +101,114 @@
             }
         }
 
+        // Get Single author
+        public function read_author(){
+            // Create Query
+            $query = 'SELECT 
+                c.category AS category, 
+                q.id, 
+                q.category_id, 
+                a.author AS author, 
+                q.author_id, 
+                q.quote 
+            FROM 
+                ' . $this->table . ' q 
+            LEFT JOIN 
+                categories c ON q.category_id = c.id 
+            LEFT JOIN 
+                authors a ON q.author_id = a.id 
+            WHERE 
+                q.author_id = ?';
+
+            // Prepare Statement
+            $stmt = $this->conn->prepare($query);
+
+            // Bind ID
+            $stmt->bindParam(1, $this->author_id);            
+
+            try{
+                // Execute query
+                $stmt->execute();
+                return $stmt;
+                
+            }catch(PDOException $e) {
+                echo json_encode(array('message' => $e->getmessage()));
+            }
+        }
+
+        // Get Single category
+        public function read_category(){
+            // Create Query
+            $query = 'SELECT 
+                c.category AS category, 
+                q.id, 
+                q.category_id, 
+                a.author AS author, 
+                q.author_id, 
+                q.quote 
+            FROM 
+                ' . $this->table . ' q 
+            LEFT JOIN 
+                categories c ON q.category_id = c.id 
+            LEFT JOIN 
+                authors a ON q.author_id = a.id 
+            WHERE 
+                q.category_id = ?';
+
+            // Prepare Statement
+            $stmt = $this->conn->prepare($query);
+
+            // Bind ID
+            $stmt->bindParam(1, $this->category_id);
+
+            try{
+                // Execute query
+                $stmt->execute();
+                return $stmt;
+            }catch(PDOException $e) {
+                echo json_encode(array('message' => $e->getmessage()));
+            }
+        }
+
+        // Get Author and Category
+        
+        public function read_authorAndCategory(){
+            // Create Query
+            $query = 'SELECT 
+                c.category AS category, 
+                q.id, 
+                q.category_id, 
+                a.author AS author, 
+                q.author_id, 
+                q.quote 
+            FROM 
+                ' . $this->table . ' q 
+            LEFT JOIN 
+                categories c ON q.category_id = c.id 
+            LEFT JOIN 
+                authors a ON q.author_id = a.id 
+            WHERE 
+                q.author_id = ? 
+            AND 
+                q.category_id = ?';
+
+            // Prepare Statement
+            $stmt = $this->conn->prepare($query);
+
+            // Bind IDs
+            $stmt->bindParam(1, $this->author_id);
+            $stmt->bindParam(2, $this->category_id);
+
+            try{
+                // Execute query
+                $stmt->execute();
+                return $stmt;
+                
+            }catch(PDOException $e) {
+                echo json_encode(array('message' => $e->getmessage()));
+            }
+        }
+
         // Create Quotes
         public function create(){
             // Create query

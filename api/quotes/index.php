@@ -36,7 +36,9 @@
         // if no specific authors are in the URL the use the data collected
         $id = $data->id;
         $quotesExist = isValid($id, $quote);
-       
+        
+        echo json_encode(array('message' => 'author_id is set'));
+            
     } 
    
     if(isset($_GET['author_id'])){
@@ -54,12 +56,21 @@
 switch($method) {
     case "GET":
         if(isset($id)) {
-            // if the ID is set retrieve the specific ID
+            // if the ID is set retrieve the specific ID     
+                        
             if(!$quotesExist){
                 echo json_encode(array('message' => 'No Quotes Found'));
             } else {
                 include_once 'read_single.php';
             }
+        } else if (isset($author_id)) {
+            if(isset($category_id)){
+                include_once 'read_authorAndCategory.php';                
+            } else {
+                include_once 'read_author.php';
+            }
+        } else if (isset($category_id)) {
+            include_once 'read_category.php';
         } else {
             include_once 'read.php';
         }
